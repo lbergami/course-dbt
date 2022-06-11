@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_greenery_addresses
+    description: User's address information. 
+  - name: stg_greenery_events
+    description: User's session information. 
+  - name: stg_greenery_order_items
+    description: Information on ordered products and quantity. 
+  - name: stg_greenery_orders
+    description: Information on orders and shippings. 
+  - name: stg_greenery_products
+    description: Information on products (e.g., product name, inventory and price). 
+  - name: stg_greenery_promos
+    description: Information on product promotion and discount amount. 
+  - name: stg_greenery_users
+    description: Personal information on users. 
