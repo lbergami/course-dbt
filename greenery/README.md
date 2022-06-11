@@ -1,4 +1,4 @@
-Welcome to your new dbt project!
+# Greenery dbt Project
 
 ### Using the starter project
 
