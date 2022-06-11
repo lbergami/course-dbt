@@ -1,6 +1,6 @@
 with products as (
 
-    select
+    select *
         
 
     from {{ source('src_greenery', 'products')}}

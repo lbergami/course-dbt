@@ -1,6 +1,6 @@
 with order_items as (
 
-    select
+    select *
         
 
     from {{ source('src_greenery', 'order_items')}}

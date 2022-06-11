@@ -1,6 +1,6 @@
 with users as (
 
-    select
+    select *
         
 
     from {{ source('src_greenery', 'users')}}

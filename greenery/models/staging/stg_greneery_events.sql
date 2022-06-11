@@ -1,6 +1,6 @@
 with events as (
 
-    select
+    select * 
         
 
     from {{ source('src_greenery', 'events')}}
