@@ -4,11 +4,27 @@
 
 Answer these questions using the data available using SQL queries. You should query the dbt generated (staging) tables you have just created. For these short answer questions/queries create a separate readme file in your repo with your answers.
 
-1) How many users do we have? (130)
+1) Q: How many users do we have? A: 130
 
-select count(distinct user_id) from dbt.dbt_lorenzo_b.stg_greneery_users;
+```SQL
+select count(distinct user_id) from dbt.dbt_lorenzo_b.stg_greenery_users;
+```
 
-2) On average, how many orders do we receive per hour?
+2) Q: On average, how many orders do we receive per hour? A: 7.52
+
+```SQL
+with lkp_order_numbers as (
+
+select date(created_at) as order_date,
+       extract(hour from created_at) as order_hour_day, 
+       count(order_id) as n_orders
+from dbt.dbt_lorenzo_b.stg_greenery_orders
+group by date(created_at), extract(hour from created_at)
+)
+
+select round(avg(n_orders), 2)
+from lkp_order_numbers;
+```
 
 3) On average, how long does an order take from being placed to being delivered?
 
