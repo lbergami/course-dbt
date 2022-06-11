@@ -1,6 +1,10 @@
 # Greenery dbt Project
 
-### Using the starter project
+## Week 1 Assignment 
+
+Answer these questions using the data available using SQL queries. You should query the dbt generated (staging) tables you have just created. For these short answer questions/queries create a separate readme file in your repo with your answers.
+
+1) How many users do we have?
 
 Try running the following commands:
 - dbt run
