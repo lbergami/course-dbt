@@ -16,13 +16,11 @@ from dbt.dbt_lorenzo_b.stg_greenery_users;
 ```SQL
 with lkp_order_numbers as (
 
-select date(created_at) as order_date,
-       extract(hour from created_at) as order_hour_day, 
+select date_trunc('hour', created_at), 
        count(order_id) as n_orders
 from dbt.dbt_lorenzo_b.stg_greenery_orders
-group by date(created_at), extract(hour from created_at)
+group by 1
 )
-
 select round(avg(n_orders), 2) as n_orders_per_hour
 from lkp_order_numbers;
 ```
@@ -70,18 +68,21 @@ order by n_orders_per_customer
 
  ```
 
-5) **Q:** On average, how many unique sessions do we have per hour? **A:** 61.28
+5) **Q:** On average, how many unique sessions do we have per hour? **A:** 16.33
 
 ```SQL
-with lkp_sessions as (
-select date(created_at) as day,
-            extract(hour from created_at) as day_hour, 
-            count(session_id) as n_sessions
+with lkp_unique_sessions as (
+
+select 
+  date_trunc('hour', created_at), 
+  count(distinct session_id) as count_unique_session_id
 from dbt.dbt_lorenzo_b.stg_greenery_events
-group by date(created_at), extract(hour from created_at)
+group by 1
+
 )
-select round(avg(n_sessions), 2) as avg_n_session
-from lkp_sessions;
+
+select round(avg(count_unique_session_id), 2) as avg_unique_sessions 
+from lkp_unique_sessions
  ```
 
 

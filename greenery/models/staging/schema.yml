@@ -2,15 +2,16 @@ version: 2
 
 models:
   - name: stg_greenery_addresses
-    description: User's address information. 
+    description: User's address information, incl. address, zipcode, state and country.
   - name: stg_greenery_events
-    description: User's session information. 
+    description: User's session information, incl. type of the event timestamp etc.
   - name: stg_greenery_order_items
-    description: Information on ordered products and quantity. 
+    description: Information on single items in the ordered products and quantities. 
   - name: stg_greenery_orders
-    description: Information on orders and shippings. 
+    description: Information on orders and delivery including variables on the user (e.g., user_id, address_id);
+                 order (e.g., order cost, timestamp); shipping (costs, services, status and dates on delivery)
   - name: stg_greenery_products
-    description: Information on products (e.g., product name, inventory and price). 
+    description: Information on products, e.g., product name, inventory and price 
   - name: stg_greenery_promos
     description: Information on product promotion and discount amount. 
   - name: stg_greenery_users

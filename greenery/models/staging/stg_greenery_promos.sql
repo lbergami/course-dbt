@@ -1,8 +1,8 @@
 with promos as (
 
-    select *
-        
-
+    select promo_id,
+           discount,
+           status
     from {{ source('src_greenery', 'promos')}}
 
 )
