@@ -1,6 +1,6 @@
 with addresses as (
 
-    select address_id, 
+    select address_id as address_guid, 
            address,
            zipcode,
            state,

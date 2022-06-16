@@ -7,7 +7,7 @@ Answer these questions using the data available using SQL queries. You should qu
 1) **Q:** How many users do we have? **A:** 130
 
 ```SQL
-select count(distinct user_id) as n_users 
+select count(distinct user_guid) as n_users 
 from dbt.dbt_lorenzo_b.stg_greenery_users;
 ```
 
@@ -16,8 +16,8 @@ from dbt.dbt_lorenzo_b.stg_greenery_users;
 ```SQL
 with lkp_order_numbers as (
 
-select date_trunc('hour', created_at), 
-       count(order_id) as n_orders
+select date_trunc('hour', order_at_utc), 
+       count(order_guid) as n_orders
 from dbt.dbt_lorenzo_b.stg_greenery_orders
 group by 1
 )
@@ -30,17 +30,17 @@ from lkp_order_numbers;
 ```SQL
 with lkp_delivered_orders as (
 
-select order_id,
-       created_at, 
-       delivered_at, 
-       delivered_at - created_at as diff_day, 
-       (extract(epoch from (delivered_at - created_at))) / 3600 as diff_hour
+select order_guid,
+       order_at_utc, 
+       order_delivered_at_utc, 
+       order_delivered_at_utc - order_at_utc as diff_day, 
+       (extract(epoch from (order_delivered_at_utc - order_at_utc))) / 3600 as diff_hour
        
 from dbt.dbt_lorenzo_b.stg_greenery_orders
-where status = 'delivered'
+where order_status = 'delivered'
 )
 select round(cast(avg(diff_hour) as numeric), 2) as average_waiting_time_hour
-from lkp_delivered_orders
+from lkp_delivered_orders;
 ```
 
 4) **Q:** How many users have only made one purchase? Two purchases? Three+ purchases?
@@ -50,22 +50,20 @@ Note: you should consider a purchase to be a single order. In other words, if a 
 
  ```SQL
 with lkp_user_orders as (
-
-select user_id,
+select user_guid,
        case
-       when count(order_id) = 1 then '1'
-       when count(order_id) = 2 then '2'
-       when count(order_id) > 2 then '3+'
+       when count(order_guid) = 1 then '1'
+       when count(order_guid) = 2 then '2'
+       when count(order_guid) > 2 then '3+'
        end as n_orders_per_customer
 from dbt.dbt_lorenzo_b.stg_greenery_orders
-group by user_id
+group by user_guid
 )
 select n_orders_per_customer, 
        count(*) as count
 from lkp_user_orders
 group by n_orders_per_customer
-order by n_orders_per_customer
-
+order by n_orders_per_customer;
  ```
 
 5) **Q:** On average, how many unique sessions do we have per hour? **A:** 16.33
@@ -74,8 +72,8 @@ order by n_orders_per_customer
 with lkp_unique_sessions as (
 
 select 
-  date_trunc('hour', created_at), 
-  count(distinct session_id) as count_unique_session_id
+  date_trunc('hour', event_at_utc), 
+  count(distinct session_guid) as count_unique_session_id
 from dbt.dbt_lorenzo_b.stg_greenery_events
 group by 1
 
