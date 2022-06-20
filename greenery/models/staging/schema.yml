@@ -4,7 +4,7 @@ models:
   - name: stg_greenery_addresses
     description: User's address information, incl. address, zipcode, state and country.
     columns:
-      - name: address_id
+      - name: address_guid
         description: Primary key for addresses.
         tests:
           - not_null
@@ -13,7 +13,7 @@ models:
   - name: stg_greenery_events
     description: User's session information, incl. type of the event timestamp etc.
     columns:
-      - name: event_id
+      - name: event_guid
         description: Primary key for events.
         tests:
           - not_null
@@ -22,11 +22,11 @@ models:
   - name: stg_greenery_order_items
     description: Information on single items in the ordered products and quantities. 
     columns:
-      - name: order_id
+      - name: order_guid
         description: order identification code. In combination with product_id, primary key for the order items
         tests:
           - not_null
-      - name: product_id
+      - name: product_guid
         description: ProductId of a single item in this order. In combination with order_id, primary key for the order items
         tests:
           - not_null
@@ -35,7 +35,7 @@ models:
     description: Information on orders and delivery including variables on the user (e.g., user_id, address_id);
                  order (e.g., order cost, timestamp); shipping (costs, services, status and dates on delivery)
     columns:
-      - name: order_id
+      - name: order_guid
         description: Primary key for orders.
         tests:
           - not_null
@@ -44,7 +44,7 @@ models:
   - name: stg_greenery_products
     description: Information on products, e.g., product name, inventory and price 
     columns:
-      - name: product_id
+      - name: product_guid
         description: Primary key for products.
         tests:
           - not_null
@@ -53,7 +53,7 @@ models:
   - name: stg_greenery_promos
     description: Information on product promotion and discount amount. 
     columns:
-      - name: promo_id
+      - name: promo_guid
         description: Primary key for promos.
         tests:
           - not_null
@@ -62,7 +62,7 @@ models:
   - name: stg_greenery_users
     description: Personal information on users. 
     columns:
-      - name: user_id
+      - name: user_guid
         description: Primary key for users.
         tests:
           - not_null
