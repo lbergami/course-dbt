@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: fct_revenues_by_product
+    description: Revenues and unit sold by product 
+  - name: fct_revenues_by_state
+    description: Revenues and unit sold by State
+  - name: fct_user_repeat_rate
+    description:  Share or returning customers

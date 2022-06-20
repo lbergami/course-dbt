@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: dim_order_user_geo
+    description: order_guid with user's location 
+  - name: dim_users
+    description: users information with the addition of address
+  - name: fct_order_items_products
+    description: combination order items and products 
