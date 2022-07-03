@@ -3,6 +3,5 @@ version: 2
 macros:
   - name: get_aggregate_events
     description: the macro reshape the event_type colum in the wide format
-  - name: events_pivoting
-    description: first pass of the macro above. Unique values hardcoded.
+
   

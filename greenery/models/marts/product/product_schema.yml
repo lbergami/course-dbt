@@ -7,7 +7,7 @@ models:
     description: Event type by session id and user and product
   - name: fct_session
     description: summary information re session's event type and time spent by the user
-  - name: fct_overall_conversion_rate
-    description: overall product's conversion rate (based on 'checkout' event)
-  - name: fct_conversion_rate_by_product
-    description: product's conversion rate (based on 'checkout' event)  
+  - name: fct_overall_product_funnel
+    description: overall product funnel (i.e., with no further product distinction) 
+  - name: fct_product_funnel
+    description: funnel by product
